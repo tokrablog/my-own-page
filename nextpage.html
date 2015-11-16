@@ -1,0 +1,172 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;list-style: none;}
+		img{border: none;width: 125px;height: 350px;}
+		
+		#btn1 {width: 140px;height: 60px;font-size: 100%;background: #ff634c;border: none;cursor: pointer;color: #fff;position: absolute;left: 50%;
+			margin-left: -70px;top: 20px;}
+		#btn1:hover {background: #ff634c;opacity: 0.8;}
+		#box {border: 1px solid #ccc;height: 450px;width: 1100px; position: relative;margin: 130px auto 0;}
+
+
+		#tips {background: #a2c800;width: 190px;height: 40px;border-radius:4px; line-height: 40px;vertical-align: middle;left: -190px;opacity: 0;}
+		#tips h2{color: #fff;font-size: 100%;}
+		
+		#ul1 {position: relative;left: 0;top: 0; }
+		#ul1 li{float: left;left: 0;top: 0;margin: 15px;}
+		#ul1 .teaser {position: absolute;left: 0;top:0px;z-index: 999999;background: #18162b ;opacity: 0.5;height: 350px;width: 125px;}
+		#ul1 .teaser:hover{opacity: 1;background: none;color: #fff;font-size: 400%;text-align: center;vertical-align: middle;line-height: 300px;}
+
+		#ul1 .teaser h1{font-size: 100% ;color:#fff; }
+		#ul1 .teaser p{font-size: 100% ;color: #666;}
+
+	</style>
+	<script src="move11.js"></script>
+	<script>
+
+	window.onload=function(){
+		var oBtn=document.getElementById('btn1');
+		var oBox = document.getElementById('box');
+		var oUl =document.getElementById('ul1');
+		var content=1;
+		var aLi= oUl.getElementsByTagName('li');
+		var ready=true;
+		var oTip=document.getElementById('tips');
+
+		// setTimeout(function(){move(oTip,{left:0,opacity:0.8},{time:300,type:'ease-in-out'})},2000);
+		
+		var aPosLi=[]
+		for(var i=0;i<aLi.length;i++){
+			aPosLi.push({left:aLi[i].offsetLeft,top:aLi[i].offsetTop,width:aLi[i].offsetWidth,height:aLi[i].offsetHeight,opacity:1});
+			aLi[i].style.left=aPosLi[i].left+'px';
+			aLi[i].style.top=aPosLi[i].top+'px';
+
+		}
+			for(var i=0;i<aLi.length;i++){
+			aLi[i].style.position='absolute';
+			aLi[i].style.margin=0;
+			aLi[i].children[1].innerHTML=content++;	
+		}
+
+		oBtn.onclick=function(){
+		if(!ready) return;
+		ready=false;
+		
+		down();	
+	};
+	
+	function down(){
+		var i=aLi.length-1;
+		var timer=setInterval(function(){
+			(function(index){
+				move(aLi[i],{left:oUl.offsetWidth/2,top:oUl.offsetHeight,width:0,height:0,opacity:0},{time:500,type:'ease-in-out',fn:function(){
+					if(index==0){
+						
+						for(var i=0;i<aLi.length;i++){
+							aLi[i].children[1].innerHTML=content++;	
+						}
+						up();
+					}
+					
+				}});
+			})(i);	
+			
+			i--
+			if(i==-1) clearInterval(timer);	
+		},100);
+	}
+	
+	function up(){
+		var i=aLi.length-1;
+		var timer=setInterval(function(){
+			(function(index){
+				move(aLi[i],aPosLi[i],{time:500,type:'ease-in-out',fn:function(){
+					if(index==0){
+						ready=true;	
+					}
+				}});
+			})(i);
+			i--;
+			if(i==-1) clearInterval(timer);	
+		},100);	
+	}
+};
+
+	
+
+
+	
+	</script>
+</head>
+<body>
+	<input type="button" value="next page" id="btn1">
+	<div id='tips'>
+	<h2 >试试鼠标悬停图片吧 ^ ^</h2>
+	
+	</div>
+	
+		<div id="box">
+		<ul id='ul1'>
+			<li class='active'>
+				<img src="image/483ae51498364ffe95ec33c6a20d6a5b_700.jpg" alt="">
+				<div class='teaser'>
+					<h1>Head</h1>
+					<p>Content</p>
+				</div>
+			</li>
+			<li>
+				<img src="image/585788a4402b32808796bcf822a02d30_700.jpg" alt="">
+				<div class='teaser'>
+					<h1>Head</h1>
+					<p>Content</p>
+				</div>
+
+			</li>
+			<li>
+				<img src="image/69b740e0afb0bddf306969b831fdd2b2_700.jpg" alt="">
+				<div class='teaser'>
+					<h1>Head</h1>
+					<p>Content</p>
+				</div>
+
+			</li>
+			<li>
+				<img src="image/6e46878ae816dbc43e88ca2a4a570999_700.jpg" alt="">
+				<div class='teaser'>
+					<h1>Head</h1>
+					<p>Content</p>
+				</div>
+
+			</li>
+			<li>
+				<img src="image/6f320a53527474ae8b08176c7ad500a0_700.jpg" alt="">
+				<div class='teaser'>
+					<h1>Head</h1>
+					<p>Content</p>
+				</div>
+
+			</li>
+			<li>
+				<img src="image/ac7f69aae30d5127d0672bc10a1f77d5_700.jpg" alt="">
+				<div class='teaser'>
+					<h1>Head</h1>
+					<p>Content</p>
+				</div>
+
+			</li>
+			<li>
+				<img src="image/adc7eae64843f9be9f5670b08922d7f2_700.jpg" alt="">
+				<div class='teaser'>
+					<h1>Head</h1>
+					<p>Content</p>
+				</div>
+
+			</li>
+		</ul>
+		
+	</div>
+</body>
+</html>
